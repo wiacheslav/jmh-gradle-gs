@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group 'jmh.demo'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    jmhCompile
+}
+
+sourceSets {
+    jmh {
+        compileClasspath += configurations.jmhCompile
+        annotationProcessorPath += configurations.compileOnly
+    }
+}
+
+dependencies {
+    jmhCompile group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.21'
+    compileOnly group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.21'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
